@@ -91,11 +91,13 @@
       var width, height;
       if(el.tagName == 'svg') {
         var box = el.getBoundingClientRect();
-        width = parseInt(clone.getAttribute('width') ||
+        width = parseInt(options.width ||
+          clone.getAttribute('width') ||
           box.width ||
           clone.style.width ||
           window.getComputedStyle(el).getPropertyValue('width'));
-        height = parseInt(clone.getAttribute('height') ||
+        height = parseInt(options.height ||
+          clone.getAttribute('height') ||
           box.height ||
           clone.style.height ||
           window.getComputedStyle(el).getPropertyValue('height'));
@@ -150,8 +152,8 @@
       var image = new Image();
       image.onload = function() {
         var canvas = document.createElement('canvas');
-        canvas.width = image.width;
-        canvas.height = image.height;
+        canvas.width = options.width || image.width;
+        canvas.height = options.height || image.height;
         var context = canvas.getContext('2d');
         context.drawImage(image, 0, 0);
 
